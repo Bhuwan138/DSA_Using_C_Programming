@@ -8,6 +8,7 @@ struct Stack
 
 void push(struct Stack *, int);
 int pop(struct Stack *);
+int peep(struct Stack *);
 
 int main()
 {
@@ -17,14 +18,14 @@ int main()
 
     do
     {
-        printf("\n1. Push() Operation\n2. Pop() Operation\n3. Exit Program\n");
-        printf("Enter a operation : ");
+        printf("\n------------------------\n| 1. Push() Operation  |\n| 2. Pop() Operation   |\n| 3.Peep Operation     |\n| 4. Exit Program      |\n------------------------\n");
+        printf("\nEnter a operation : ");
         scanf("%d", &choise);
         switch (choise)
         {
         case 1:
         {
-            printf("enter the element : ");
+            printf("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nenter the element : ");
             scanf("%d", &x);
             push(&s, x);
             break;
@@ -34,15 +35,18 @@ int main()
             x = pop(&s);
             if (x != 0)
             {
-                printf("%d is poped Sucessfully!!\n", x);
+                printf("\n=========================================\n%d is poped Sucessfully!!\n=========================================\n", x);
             }
             break;
         }
         case 3:
+            printf("\n=========================================\n%d is your top element of Stack\n=========================================\n", peep(&s));
+            break;
+        case 4:
             // break;
             goto b;
         default:
-            printf("Invalid Operation\n");
+            printf("\n=========================================\nInvalid Operation\n=========================================\n");
             break;
         }
     } while (1);
@@ -55,13 +59,13 @@ void push(struct Stack *p, int x)
 {
     if (p->tos == 4)
     {
-        printf("Stack OverFlow\n");
+        printf("\n=========================================\nStack OverFlow\n=========================================\n");
         return;
     }
     // p->tos++;
     // p->arr[p->tos] = x;
     p->arr[++p->tos] = x;
-    printf("Pushed %d Sucessfully!!\n", x);
+    printf("\n=========================================\nPushed %d Sucessfully!!\n=========================================\n", x);
 }
 
 //Pop Operation
@@ -70,11 +74,16 @@ int pop(struct Stack *p)
     // int del;
     if (p->tos == -1)
     {
-        printf("Stack Underflow\n");
+        printf("\n=========================================\nStack Underflow\n=========================================\n");
         return 0;
     }
     // del = p->arr[p->tos];
     // p->tos--;
     // return del;
     return p->arr[p->tos--];
+}
+
+int peep(struct Stack *p)
+{
+    return p->arr[p->tos];
 }

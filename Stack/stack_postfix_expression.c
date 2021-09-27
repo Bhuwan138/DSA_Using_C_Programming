@@ -14,6 +14,8 @@
 #include <stdio.h>
 #include <math.h>
 
+
+
 struct Stack
 {
     int tos;
@@ -28,7 +30,7 @@ float solve(char[]);
 
 int main()
 {
-    struct Stack s;
+    // struct Stack s;
     char postfix[50];
     float answer;
     printf("Enter a valid postfix character array : ");
@@ -103,9 +105,10 @@ float calculate(float operand1, float operand2, char ch)
 
 void push(struct Stack *p, float n)
 {
-    if (p->tos == 4)
+    if (p->tos == 49)
     {
         printf("Stack Overflow\n");
+        return;
     }
     p->arr[++p->tos] = n;
     // printf("%d is pushed sucessfully !!\n", n);
