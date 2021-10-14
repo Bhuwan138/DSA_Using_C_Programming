@@ -28,7 +28,7 @@ int main()
     float answer;
 
     printf("Enter a valid prefix character : ");
-    scanf("%s", &prefix);
+    scanf("%s", prefix);
     
     // printf("Hello \n");
     answer = solve(prefix);
