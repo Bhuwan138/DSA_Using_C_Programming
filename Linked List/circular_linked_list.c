@@ -10,6 +10,7 @@ void append(struct cnode **, int );
 void display(struct cnode *);
 void delete_first_node(struct cnode **);
 void delete_last_node(struct cnode **);
+void delete_any_node(struct cnode **, int);
 
 int main(){
     struct cnode *start = NULL;
@@ -22,7 +23,7 @@ int main(){
     display(start);
 
     printf("\n\nChecking ...\n\n");
-    delete_last_node(&start);
+    delete_any_node(&start,25);
     printf("\n\nAfter deleting \n");
     display(start);
     return 0;
@@ -134,4 +135,45 @@ void delete_last_node(struct cnode **ps){
      prev->next = *ps;
 
 
+}
+
+
+void delete_any_node(struct cnode **ps, int num){
+     struct cnode *prev, *temp;
+     //when list is empty
+    if(*ps == NULL){
+        printf("Node is Empty\n");
+        return;
+    }
+
+    temp = *ps;
+    // if( (*ps)->data == num){
+    //         *ps  = temp->next;
+    //         free(temp);
+            
+    //         return;
+    // }
+
+
+
+    do{
+        prev = temp;
+        temp = temp->next;
+    }while( (temp->data != num) && (temp != *ps));
+    
+    if( (*ps)->data == num){
+        *ps  = (*ps)->next;
+        free(temp);
+        prev->next = *ps;
+        return;
+    }
+
+    if(temp == *ps){
+        
+        printf("List is empty\n");
+    }
+    else{
+        prev->next = temp->next;
+        free(temp);
+    }
 }
