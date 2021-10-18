@@ -23,24 +23,22 @@ int main(){
    
     for (int i = 0; i < 5; i++)
     {
-        printf("%d\t",sort(&s));
+        printf("%d,\t",sort(&s));
     }
     return 0;
 }
 
 int sort(struct Stack *p){
-    struct Stack temp_stack;
+    struct Stack ts;
     int temp;
-    temp = pop(*p);
-    if(p->tos == -1){
-        push(temp_stack,temp);
+
+    while(p->arr[p->tos] != -1){
+        temp = pop(&p);
+        if(ts.arr[ts.tos] == -1)
+            push(&ts,temp);
+        
     }
-    if(temp > temp_stack.arr[temp_stack.tos]){
-        push(temp_stack,temp);
-    }
-    else{
-        push(p,pop(temp_stack));
-    }
+    
 }
 
 //Push Operation

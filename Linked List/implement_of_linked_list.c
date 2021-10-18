@@ -9,14 +9,21 @@ struct node{
 void append(struct node **, int);
 void display(struct node *);
 void delete_first_node(struct node **);
+void delete_last_node(struct node **);
+void delete_any_node(struct node **, int);
 
 int main(){
     struct node *start = NULL;
     append(&start,45);
-    // append(&start,63);
-    display(start);
-    delete_first_node(&start);
+    append(&start,63);
+    append(&start,78);
+    append(&start,35);
+    append(&start,92);
     append(&start,96);
+    display(start);
+    printf("\n\nChecking .... \n");
+    delete_any_node(&start, 45 );
+    printf("\n\nAfter deleting \n");
     display(start);
     return 0;
 }
@@ -74,6 +81,82 @@ void delete_first_node(struct node **ps){
     (*ps) = (*ps)->next;
     free(temp);
     return;
+}
 
 
+void delete_last_node(struct node **ps){
+    struct node *temp,*prev;
+    if(*ps == NULL){
+        printf("Empty Node\n");
+        return;
+    }
+
+    temp = *ps;
+    while(temp->next != NULL){
+        prev = temp;
+        temp = temp->next;
+    }
+    free(temp);
+    prev->next = NULL;
+}
+
+void delete_any_node(struct node **ps, int num){
+    struct node *temp,*prev,*next;
+    
+    //Case 1: IF Linked List is Empty
+    if(*ps == NULL){
+        printf("Empty Node\n");
+        return;
+    }
+
+    //Case 2: IF the node is first
+    // if( (*ps)->next == NULL ){
+    //     free(ps);
+    //     *ps == NULL;
+    //     return;
+    // }
+
+    //for first node
+    temp = *ps;
+    if( (*ps)->data == num ){
+        *ps =temp->next;
+        free(temp);
+        return;
+    }
+
+    //Case 3: If the node is last
+    // temp = *ps;
+    // while(temp->next != NULL){
+    //     prev = temp;
+    //     temp = temp->next;
+    // }
+    // free(temp);
+    // prev->next = NULL;
+
+    //Case 4: if there is no item in the list (my technique )
+    // temp  = *ps;
+    while(temp->data != num){
+        prev = temp;
+        temp = temp->next;
+        if(temp->next == NULL){
+            printf("Element not fouund\n");
+            return;
+        }
+    }
+    prev->next = temp->next;
+    free(temp);
+
+    // while(temp != NULL && temp->data != num){
+    //     prev =temp;
+    //     temp = temp->next;
+    // }
+
+    // if(temp == NULL){
+    //     printf("List is empty\n");
+    // }
+    // else{
+    //     prev->next = temp->next;
+    //     free(temp);
+    // }
+    
 }
