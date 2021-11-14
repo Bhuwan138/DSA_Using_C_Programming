@@ -4,8 +4,8 @@
 
 struct Queue{
     int arr[5];
-    int rear;
-    int front;
+    int rear;  // insert data in queue
+    int front;  //delete data in queue
 };
 
 void enqueue(struct Queue *, int );

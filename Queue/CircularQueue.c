@@ -35,11 +35,11 @@ void insert(struct CQueue *q, int num){
         return;
     }
 
-    // if (q->rear == 4)
-    //     q->rear ==0;
-    // else
-    //     q->rear += 1;
-    q->rear = (q->rear+1)%(sizeof(q->arr)/sizeof(int));
+    if (q->rear == 4)
+        q->rear ==0;
+    else
+        q->rear += 1;
+    // q->rear = (q->rear+1)%(sizeof(q->arr)/sizeof(int));
 
     q->arr[q->rear] = num;
     printf("\n%d is inserted succusfully.",num);
