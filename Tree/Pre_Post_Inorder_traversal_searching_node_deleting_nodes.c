@@ -31,23 +31,94 @@ int main(){
     append(&root,31);
     append(&root,96);
     append(&root,213);
-    append(&root,78);
-    postorder(root);
+    // append(&root,78);
+    preorder(root);
     delete_node(&root,96);
+    preorder(root);
     return 0;
 }
 
 int search_node(struct BST *root,int num,struct BST **child,struct BST **parent){
     struct BST *q=NULL;
-    while()
+    while(root != NULL){
+        if(root->data == num){
+            *child = root;
+            *parent = q;
+            return 1;
+        }      
+        q = root;
+
+        if(root->data > num)
+            root = root->left;
+        else
+            root = root->right;
+    }   
+    return 0;
 }
 
 void delete_node(struct BST **pr,int num){
-    struct BST *child, *parent;
+    struct BST *child, *parent,*q;
 
 
+    if(*pr == NULL){
+        printf("Tree is Empty");
+        return;
+    }
 
     int result = search_node(*pr,num,&child,&parent);
+    //if searched element is not found
+    if(result == 0){
+        printf("Element not found \n");
+        return;
+    }
+
+    //if deleted note has 2 children
+    if(child->left != NULL && child->right != NULL){
+        q = child->right;
+        parent = child;
+        while( q->left != NULL){
+            parent = q;
+            q = q->left;
+        }
+
+        child->data = q->data;
+        child = q;
+    }
+
+    //if deleted node has no child
+    if(child->left == NULL && child->right == NULL){
+
+        if(parent  == NULL)
+            *pr = NULL;
+        if(parent->left == child)
+            parent->left = NULL;
+        else
+            parent->right = NULL;
+        free(child);
+    }
+
+    //if deleted node has only left child
+    if(child->left != NULL && child->right == NULL){
+        if(parent == NULL)
+            child = child->left;
+        else if(parent->left == child)
+            parent->left = child->left;
+        else
+            parent->right = child->left;
+        free(child);
+    }
+
+    //if deleted node has only right child
+    if(child->left == NULL && child->right != NULL){
+        if(parent == NULL)
+            child = child->right;
+        else if(parent->left == child)
+            parent->left = child->right;
+        else
+            parent->right = child->right;
+        free(child);
+    }
+
 }
 
 void append(struct BST ** pr,int num){
@@ -111,6 +182,8 @@ void preorder(struct BST *p){
             p= p->left;
         }
     }
+
+    printf("\n");
 }
 
 
