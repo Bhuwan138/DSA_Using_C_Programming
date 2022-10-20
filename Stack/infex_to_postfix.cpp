@@ -90,6 +90,7 @@ void convert(char infix[] , char postfix[] ){
             postfix[j] = ch;
             j++;
         }
+        
         else{
             while(isEmpty(s) == 0)
             {
@@ -136,3 +137,4 @@ int isPrecidence(char op1, char op2)
         return 1;
    
 }
+
